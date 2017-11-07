@@ -21,7 +21,9 @@
     "express-ejs-layouts": "^2.3.1",
     "pg": "^7.3.0",
     "pg-hstore": "^2.3.2",
-    "sequelize": "^4.8.0"
+    "sequelize": "^4.8.0",
+    "socket.io": "^2.0.4",
+    "twit": "^2.2.9"
   },
   "bugs": {
     "url": "https://github.com/mdang/twit-server/issues"
