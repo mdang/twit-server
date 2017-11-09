@@ -59,12 +59,7 @@ server.listen(port, () => {
 
       const termsArr = terms.replace(/\s+/g, '').split(',');
 
-      console.log('termsArr', termsArr);
-
-      stream = twitter.stream('statuses/filter', { track: termsArr });
-
-      socket.emit('updatedTerm', terms);
-      
+      stream = twitter.stream('statuses/filter', { track: termsArr, language: 'en' });
       stream.on('tweet', tweet => {
         const data = {
           name: tweet.user.name,
@@ -75,6 +70,8 @@ server.listen(port, () => {
   
         socket.emit('tweets', data);
       });
+
+      socket.emit('updatedTerm', terms);
     });
 
     socket.on('stop', () => {

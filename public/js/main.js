@@ -8,8 +8,6 @@ console.log('main.js');
   });
   
   socket.on('tweets', function(tweet) {
-    console.log('tweet', tweet);
-
     var html = `
       <div class="row">
         <div class="col-md-8 col-md-offset-2 tweet">
@@ -30,7 +28,6 @@ console.log('main.js');
   });
 
   socket.on('updatedTerm', function(searchTerm) {
-    console.log('searchTerm', searchTerm);
     $('h3').text(`Streaming tweets for ${ searchTerm }`);
   });
 
