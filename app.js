@@ -7,8 +7,6 @@ const ejsLayouts = require('express-ejs-layouts');
 const Twit = require('twit');
 const app = express();
 
-const terms = ['javascript', 'coda', 'capitalone'];
-
 app.set('view engine', 'ejs');
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));
@@ -16,9 +14,7 @@ app.use(express.static(path.join(__dirname, 'public')));
 app.use(ejsLayouts);
 
 app.get('/', (req, res) => {
-  res.render('index', {
-    terms: terms
-  });
+  res.render('index');
 });
 
 // catch 404 and forward to error handler
@@ -51,20 +47,34 @@ const port = process.env.PORT || 3000;
 
 server.listen(port, () => {
   console.log('Server started on port %s', port);
+
   const io = require('socket.io')(server);
+  let stream;
   
   io.on('connect', socket => {
-    const stream = twitter.stream('statuses/filter', { track: terms });
+    socket.on('updateTerm', terms => {
+      if (stream) {
+        stream.stop();
+      }
 
-    stream.on('tweet', tweet => {
-      const data = {};
+      const termsArr = terms.replace(/\s+/g, '').split(',');
 
-      data.name = tweet.user.name;
-      data.screen_name = tweet.user.screen_name;
-      data.user_profile_image = tweet.user.profile_image_url;
-      data.text = tweet.text;
+      console.log('termsArr', termsArr);
 
-      socket.emit('tweets', data);
+      stream = twitter.stream('statuses/filter', { track: termsArr });
+
+      socket.emit('updatedTerm', terms);
+      
+      stream.on('tweet', tweet => {
+        const data = {
+          name: tweet.user.name,
+          screen_name: tweet.user.screen_name,
+          user_profile_image: tweet.user.profile_image_url,
+          text: tweet.text
+        };
+  
+        socket.emit('tweets', data);
+      });
     });
   });
 });

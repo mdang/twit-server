@@ -7,28 +7,18 @@
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
   <meta name="apple-touch-fullscreen" content="yes" />
-  <title>Express Starter</title>
+  <title>Twit Server</title>
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" />
+  <link href="https://fonts.googleapis.com/css?family=Anton|Roboto" rel="stylesheet" />
   <link rel="stylesheet" href="/css/global.css" />
 </head>
 <body>
 <div class="container">
-  <h1>Express Starter</h1>
+  <h1>Twit Server</h1>
   <%- body %>
 </div>
 <script type="text/javascript" src="/socket.io/socket.io.js"></script>
 <script type="text/javascript" src="https://code.jquery.com/jquery-2.1.1.js"></script>
 <script src="/js/main.js" charset="utf-8"></script>
-<script type="text/javascript">
-    var socket = io();
-  
-      socket.on('connect', function() {
-        console.log('Connected!');
-      });
-  
-      socket.on('tweets', function(tweet) {
-        var html = '<div class="row"><div class="col-md-6 col-md-offset-3 tweet"><img src="' + tweet.user_profile_image + '" class="avatar pull-left"/><div class="names"><span class="full-name">' + tweet.name + ' </span><span class="username">@' +tweet.screen_name + '</span></div><div class="contents"><span class="text">' + tweet.text + '</span></div></div></div>';
-        $('#tweet-container').prepend(html);
-      });
-</script>
 </body>
 </html>
