@@ -9,11 +9,11 @@ console.log('main.js');
   
   socket.on('tweets', function(tweet) {
     console.log('tweet', tweet);
-    
+
     var html = `
       <div class="row">
-        <div class="col-md-6 col-md-offset-3 tweet">
-          <div class="tweet-profile-image">
+        <div class="col-md-8 col-md-offset-2 tweet">
+          <div class="profile-image">
             <img src="${ tweet.user_profile_image }" class="avatar pull-left"/>
           </div>
           <div class="names">
@@ -31,7 +31,11 @@ console.log('main.js');
 
   socket.on('updatedTerm', function(searchTerm) {
     console.log('searchTerm', searchTerm);
-    $('h3').text(`Twitter Search for ${ searchTerm }`);
+    $('h3').text(`Streaming tweets for ${ searchTerm }`);
+  });
+
+  socket.on('stopped', function() {
+    $('h3').text('');
   });
 
   $('form').on('submit', function(e) {
@@ -39,6 +43,11 @@ console.log('main.js');
 
     var searchTerm = $('input').val();
     socket.emit('updateTerm', searchTerm);
+  });
+
+  $('.stop').on('click', function(e) {
+    socket.emit('stop');
+    e.preventDefault();
   });
 
 })();

@@ -76,6 +76,13 @@ server.listen(port, () => {
         socket.emit('tweets', data);
       });
     });
+
+    socket.on('stop', () => {
+      if (stream) {
+        stream.stop();
+        socket.emit('stopped');
+      }
+    });
   });
 });
 

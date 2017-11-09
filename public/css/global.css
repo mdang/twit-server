@@ -5,35 +5,43 @@ body {
   color: #323332;
 }
 
-h1 {
-  font-family: 'Anton', sans-serif;
+h1, h3 {
   text-align: center;
   color: #fff;
-  line-height: 3;
+}
+
+h1 {
+  font-family: 'Anton', sans-serif;
 }
 
 #tweet-container {
   margin: 1em;
 }
 
-.tweet-profile-image {
-  overflow: hidden;
-  float: left;
-  width: 100px;
-}
-
 .tweet {
   padding: 5px;
-  border: 1px solid rgba(50,51,50,0.5);
+  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
   margin-bottom: 10px;
   background-color: #fdfdfd;
-  -webkit-border-radius: 3px;
-  -moz-border-radius: 3px;
-  border-radius: 3px;
+}
+
+.profile-image {
+  overflow: hidden;
+  float: left;
+  padding: .5em;
 }
 
 .names, .contents {
   margin-left: 60px;
+  padding: .5em;
+}
+
+.names {
+  font-weight: bold;
+}
+
+.contents {
+  color: #333;
 }
 
 form {
