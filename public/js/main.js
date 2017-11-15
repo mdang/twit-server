@@ -2,11 +2,11 @@ console.log('main.js');
 
 (function() {
   var socket = io();
-  
+
   socket.on('connect', function() {
     console.log('Connected!');
   });
-  
+
   socket.on('tweets', function(tweet) {
     var html = `
       <div class="row">
@@ -23,8 +23,8 @@ console.log('main.js');
           </div>
         </div>
       </div>`;
-  
-    $('#tweet-container').prepend(html);
+
+    $('#tweets').prepend(html);
   });
 
   socket.on('updatedTerm', function(searchTerm) {
