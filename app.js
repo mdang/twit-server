@@ -52,8 +52,6 @@ server.listen(port, () => {
   let stream;
 
   io.on('connect', socket => {
-    socket.emit('client connected');
-
     socket.on('updateTerm', terms => {
       if (stream) {
         stream.stop();
