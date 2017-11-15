@@ -50,8 +50,10 @@ server.listen(port, () => {
 
   const io = require('socket.io')(server);
   let stream;
-  
+
   io.on('connect', socket => {
+    socket.emit('client connected');
+
     socket.on('updateTerm', terms => {
       if (stream) {
         stream.stop();
@@ -67,7 +69,7 @@ server.listen(port, () => {
           user_profile_image: tweet.user.profile_image_url,
           text: tweet.text
         };
-  
+
         socket.emit('tweets', data);
       });
 
